@@ -1,0 +1,15 @@
+#local directory
+/local/
+
+#node_modules directory
+/node_modules/
+
+#config files
+.env
+package-lock.json
+
+#test files
+test.js
+
+#draft file
+/src/draft.txt

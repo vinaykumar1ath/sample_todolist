@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager</title>
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+	<h1>ToDoList</h1>
+	<button id="logoutBtn" class="logout-btn">Logout</button>
+  <div id="app">
+    <!-- Edit Tab -->
+    <div id="edit-tab">
+      <h2 id="edit-tab-title">Create Task</h2>
+      <form id="task-form">
+	  <label for="task">Task:</label>
+        <input type="text" id="task"  required>
+		<label for="description">Description:</label>
+        <textarea id="description"  required></textarea>
+		<label for="finishDate">Finish Date:</label>
+        <input type="datetime-local" id="finishDate"  required>
+		<input type="hidden" id="startDate" value="%00%00%00%00%00">
+        <button type="submit" id="submit-button">Create</button>
+      </form>
+    </div>
+
+    <!-- Tabs (Active and Completed) -->
+    <div id="tabs">
+      <div id="active-tab" class="task-tab">
+        <h3>Active Tasks</h3>
+        <div id="active-task-list">
+          <!-- Task components will be inserted here dynamically -->
+        </div>
+      </div>
+
+      <div id="completed-tab" class="task-tab">
+        <h3>Completed Tasks</h3>
+        <div id="completed-task-list">
+          <!-- Task components will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/home.js"></script>
+</body>
+</html>

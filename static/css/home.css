@@ -1,0 +1,194 @@
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px; /* Adds space above the header */
+    margin-bottom: 20px; /* Adds space below the header */
+    width: 100%;
+}
+
+.logout-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  top: 20px; /* Distance from the top */
+  right: 20px; /* Distance from the right */
+}
+
+.logout-btn:hover {
+  background-color: #c0392b;
+}
+
+.logout-btn:focus {
+  outline: none;
+}
+
+#app {
+  width: 80%;
+  margin: auto;
+  padding-top: 20px;
+}
+
+/* Tab Styling */
+#edit-tab, .task-tab {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h3, h2 {
+  color: #333;
+}
+
+/* Form Styling */
+#task-form input, #task-form textarea, #task-form button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+#task-form textarea {
+  height: 100px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Tab and Component Styles */
+#tabs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-tab {
+  width: 48%;
+}
+
+#active-tab {
+  background-color: #e3f2fd; /* Blue palette */
+}
+
+#completed-tab {
+  background-color: #c8e6c9; /* Green palette */
+}
+
+/* Task Component Styling */
+.task-component {
+  background-color: #fff;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect on task component */
+.task-component:hover {
+  background-color: #f1f1f1;
+}
+
+/* Container for buttons */
+.task-actions {
+  display: flex;               /* Use flexbox to position buttons side by side */
+  justify-content: space-between; /* Distribute buttons with space in between */
+  gap: 10px;                   /* Optional: Space between buttons */
+  margin-top: 10px;            /* Add a little margin for spacing */
+}
+
+/* Style for individual buttons */
+button.task-action {
+  padding: 10px 20px;          /* Adjust padding for better spacing */
+  font-size: 14px;             /* Font size */
+  border: none;               /* Remove border */
+  cursor: pointer;            /* Add pointer cursor */
+  border-radius: 5px;         /* Rounded corners */
+}
+
+/* Specific styles for each button */
+button.complete {
+  background-color: #2196F3;  /* Blue for complete */
+  color: white;               /* White text */
+}
+
+button.edit {
+  background-color: #ff9800;  /* Orange for edit */
+  color: white;               /* White text */
+}
+
+button.remove {
+  background-color: #f44336;  /* Red for remove */
+  color: white;               /* White text */
+}
+
+/* Make buttons visible by default (without hover) */
+.task-actions button {
+  display: inline-block;  /* Ensure buttons are displayed inline and not hidden */
+}
+
+/* Button hover styles */
+button.complete:hover {
+  background-color: #1976D2;
+}
+
+button.edit:hover {
+  background-color: #f57c00;
+}
+
+button.remove:hover {
+  background-color: #d32f2f;
+}
+
+/* Active Tab Styles */
+#active-tab {
+  background-color: #e3f2fd; /* Blue palette */
+}
+
+/* Completed Tab Styles */
+#completed-tab {
+  background-color: #c8e6c9; /* Green palette */
+}
+
+/* Remove the Complete and Edit buttons in the Completed tab */
+#completed-tab .task-actions button.complete,
+#completed-tab .task-actions button.edit {
+  display: none; /* Hide Complete and Edit buttons in completed tab */
+}
+
+/* Make sure only 'Remove' button is visible in 'completed-tab' */
+#completed-tab .task-actions button.remove {
+  display: inline-block; /* Display remove button */
+}
+
+/* Show 'Complete' and 'Edit' buttons only in the 'active-tab' */
+#active-tab .task-component:hover .task-actions button.complete {
+  display: inline-block; /* Complete button is visible only in active tab */
+}
+
+#active-tab .task-component:hover .task-actions button.edit {
+  display: inline-block; /* Edit button is visible only in active tab */
+}

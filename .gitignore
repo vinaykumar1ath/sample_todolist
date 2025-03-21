@@ -13,3 +13,6 @@ test.js
 
 #draft file
 /src/draft.txt
+
+#static archive
+/static/archived/

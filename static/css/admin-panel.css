@@ -1,0 +1,371 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.page-title h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.main-content {
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.querying, .editing, .committing-to-db {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+}
+
+.querying {
+    width: 50%;
+}
+
+.querying .division-header-querying {
+    font-size: 30px; /* This will only apply to the Querying header */
+	margin-bottom: 20px; /* Adjust the margin-bottom as needed */
+	font-weight: bold; /* Make the text bold */
+}
+
+.querying-inner {
+    display: flex;
+    flex-direction: row; /* Make primary-filter and secondary-filter-and-query-customisations side by side */
+    height: 100%;
+    justify-content: space-between;
+}
+
+/* Newly added styles for the Mode selector */
+label[for="collection"] {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
+select#collection {
+    width: 100%; /* Ensure the select box spans the entire width */
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.primary-filter {
+    width: 48%; /* Ensure primary-filter takes up 48% of the space */
+    padding: 10px;
+}
+
+
+
+.secondary-filter-and-query-customisations {
+    width: 48%; /* Secondary section occupies 48% */
+    display: flex;
+    flex-direction: column; /* Stack secondary-filter and query-customisations vertically */
+}
+
+.secondary-filter {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px; /* Space between the filters */
+	background-color: #fafafa;
+}
+
+/* Styling for the 'Unique' select dropdown */
+.secondary-filter select[name="secondary-filter-unique"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+/* Styling for 'Skip' and 'Limit' input fields */
+.secondary-filter input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Additional spacing between elements in the secondary filter */
+.secondary-filter div {
+    margin-bottom: 10px;
+}
+
+.query-customisations {
+    width: 100%;
+    padding: 10px;
+    background-color: #fafafa;
+}
+
+/* Styling for the 'Fields' checkboxes */
+.query-customisations #fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.query-customisations input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Styling for the 'Sort by Field' and 'Order' selectors */
+.query-customisations select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+/* Adjusting spacing between sections in Query Customisations */
+.query-customisations div {
+    margin-bottom: 15px;
+}
+
+.editing {
+    width: 25%;
+}
+
+.editing .division-header-editing {
+    font-size: 30px; /* This will only apply to the editing header */
+	margin-bottom: 20px; /* Adjust the margin-bottom as needed */
+	font-weight: bold; /* Make the text bold */
+}
+	
+
+.editing-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Styling for 'Allow Multi Update' checkbox */
+.edit-customisations input[type="checkbox"] {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+/* Adjusting space for better alignment in Edit Customisations */
+.edit-customisations div {
+    margin-bottom: 15px;
+}
+
+.update {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+
+.edit-customisations {
+    width: 100%;
+    padding: 10px;
+    background-color: #fafafa;
+}
+
+.committing-to-db {
+    width: 25%;
+    padding: 10px;
+}
+
+.committing-to-db .division-header-committing-to-db {
+    font-size: 30px; /* This will only apply to the committing-to-db header */
+	margin-bottom: 20px; /* Adjust the margin-bottom as needed */
+	font-weight: bold; /* Make the text bold */
+}
+
+.mode-selector {
+	font-size: 20px; 
+    margin-top: 10px;
+}
+
+.mode-selector select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.viewer {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.scrollbar {
+    display: flex;
+    overflow-x: auto;
+    margin-bottom: 10px;
+    padding: 10px 0;
+}
+
+.tab {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #ececec;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.viewer-content {
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    min-height: 200px;
+}
+
+/* Button styling */
+button {
+    padding: 8px 12px;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.dynamic-loader {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #777;
+}
+
+.division-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Additional Styles for Dynamically Added Fields in Primary Filter and Update sections */
+
+/* Adjusting vertical size of dynamically added Primary Filter items */
+.primary-filter-dynamic-loader .primary-filter-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;  /* Reduced gap between elements */
+    padding: 8px;  /* Reduced padding */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;  /* Reduced margin bottom */
+}
+
+/* Adjust input and select fields inside dynamically generated Primary Filter items */
+.primary-filter-dynamic-loader .primary-filter-item select,
+.primary-filter-dynamic-loader .primary-filter-item input {
+    width: 100%;
+    padding: 6px;  /* Reduced padding */
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+/* Adjusting vertical size of dynamically added Update items */
+.update-dynamic-loader .update-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;  /* Reduced gap between elements */
+    padding: 8px;  /* Reduced padding */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;  /* Reduced margin bottom */
+}
+
+/* Adjusting input and select fields inside dynamically generated Update items */
+.update-dynamic-loader .update-item select,
+.update-dynamic-loader .update-item input {
+    width: 100%;
+    padding: 6px;  /* Reduced padding */
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+/* Adding space and margin for buttons inside dynamically added items */
+.primary-filter-dynamic-loader .primary-filter-item button,
+.update-dynamic-loader .update-item button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.primary-filter-dynamic-loader .primary-filter-item button:hover,
+.update-dynamic-loader .update-item button:hover {
+    background-color: #45a049;
+}
+
+/* Adjusting button padding for a slightly more compact look */
+.primary-filter-dynamic-loader .primary-filter-item button,
+.update-dynamic-loader .update-item button {
+    padding: 8px 12px;  /* Reduced button padding */
+    margin-top: 8px;  /* Reduced top margin */
+}
+
+.primary-filter-dynamic-loader,
+.update-dynamic-loader {
+    padding: 8px;  /* Reduced padding */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 15px;  /* Reduced top margin */
+}
+
+/* .viewer-content { */
+    /* padding: 20px; */
+    /* background-color: #f4f4f4; */
+    /* border: 1px solid #ddd; */
+    /* border-radius: 5px; */
+/* } */
+
+.field-container {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+.field {
+    margin-bottom: 10px;
+}
+
+.viewer-content label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+p {
+    font-size: 16px;
+    margin: 0;
+}
+

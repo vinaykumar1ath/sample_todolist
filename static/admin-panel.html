@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoList Admin Panel</title>
+    <link rel="stylesheet" href="css/admin-panel.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Page Title -->
+        <header class="page-title">
+            <h1>ToDoList Admin Panel</h1>
+        </header>
+
+        <!-- Main Divisions -->
+        <div class="main-content">
+            <!-- Querying Division -->
+			<div class="querying">
+				<div class="division-header-querying">Querying</div>
+				<label for="collection">Collection</label>
+				<select id="collection">
+					<!-- JS will populate this -->
+					<option value="">Select Collection</option>
+				</select>
+
+				<div class="querying-inner">
+					<div class="primary-filter">
+						<div class="division-header">Primary Filter</div>
+						<div class="primary-filter-dynamic-loader">
+							<!--div class="primary-filter-item">
+								<!-- Dynamically generated content >
+							</div-->
+						</div>
+						<button>Add Filter</button>
+					</div>
+
+					<div class="secondary-filter-and-query-customisations">
+						<div class="secondary-filter">
+							<div class="division-header">Secondary Filter</div>
+							<div>
+								<label for="secondary-filter-unique">Unique</label>
+								<select id="secondary-filter-unique" name="secondary-filter-unique"class="secondary-filter-unique">
+									<!-- JS will populate this dynamically -->
+									<!-- option value="">Select Unique Option</option -->
+								</select>
+							</div>
+							<div>
+								<label for="skip">Skip</label>
+								<input type="number" id="secondary-filter-skip" name="skip" min="0">
+							</div>
+							<div>
+								<label for="limit">Limit</label>
+								<input type="number" id="secondary-filter-limit" name="limit" min="0">
+							</div>
+						</div>
+
+						<div class="query-customisations">
+							<div class="division-header">Query Customisations</div>
+							<div>
+								<label for="query-customisations-fields">Fields</label>
+								<div id="query-customisations-fields" class="query-customisations-fields">
+									<!-- JS will populate this dynamically with checkboxes -->
+									<!-- More fields will be dynamically added here -->
+								</div>
+							</div>
+
+							<div>
+								<label for="sort-field">Sort by Field</label>
+								<select id="sort-field" name="sort-field">
+									<!-- JS will populate this dynamically -->
+									<!--option value="">Select Field</option-->
+								</select>
+							</div>
+
+							<div>
+								<label for="order">Order</label>
+								<select id="order" name="order">
+									<option value="">None</option>
+									<option value="1">Ascending</option>
+									<option value="-1">Descending</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+            <!-- Editing Division -->
+            <div class="editing">
+                <div class="division-header-editing">Editing</div>
+                <div class="editing-inner">
+                    <div class="update">
+                        <div class="division-header">Update</div>
+                        <div class="update-dynamic-loader">
+							<!--div class="update-item">
+							<!-- Dynamically generated content >
+							</div-->
+						</div>
+                        <button>Add Update</button>
+                    </div>
+
+                    <div class="edit-customisations">
+                        <div class="division-header">Edit Customisations</div>
+                        <div>
+                            <label for="allow-multi-update">Allow Multi Update</label>
+                            <input type="checkbox" id="allow-multi-update" name="allow-multi-update">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Committing to Database Division -->
+            <div class="committing-to-db">
+                <div class="division-header-committing-to-db">Committing to DB</div>
+                <div class="mode-selector">
+                    <label for="mode">Mode</label>
+                    <select id="mode">
+                        <!-- JS will populate this  -->
+						<option value="Default Mode">Default Mode</option>
+                        <option value="Query Mode">Query Mode</option>
+						<option value="Edit Mode">Edit Mode</option>
+						<option value="Archive Mode">Archive Mode</option>
+						<option value="Delete Mode">Delete Mode</option>
+                    </select>
+                </div>
+				<div class="database-interaction-buttons">
+				<!-- Database interaction buttons loaded dynamically -->
+				</div>
+            </div>
+        </div>
+
+        <!-- Viewer Division -->
+        <div class="viewer">
+            <div class="scrollbar">
+                <div class="tab">Viewer Tab</div>
+                <!-- JS will populate this -->
+            </div>
+            <div class="viewer-content">
+                Viewer Tab Content
+            </div>
+        </div>
+    </div>
+	<script src='js/admin-panel.js'></script>
+</body>
+</html>

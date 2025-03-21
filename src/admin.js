@@ -33,8 +33,9 @@ async function adminPanel(req, res){
 	if(! (req.session.admin === admin_session )){
 		return res.status(403).json({"message":"ACCESS DENIED"})
 	}
-	
-	return res.send("Building..........")
+	if(! req.params.n)
+		return res.sendFile(path.join(__dirname,"static","admin-panel.html"))
+	else return res.sendFile(path.join(__dirname,"static",`admin-panel${req.params.n}.html`))
 }
 
 //req => {session:object, body.adminAuthCode:"string"}
@@ -106,7 +107,6 @@ async function adminGetData(req,res){
 	}
 	
 	console.log("---------query---------\n",req.query,"\n------------query------------")
-	
 	const data = req.query
 	
 	let message = ""
@@ -118,6 +118,7 @@ async function adminGetData(req,res){
 	let data_secondaryFilter
 	let data_sort
 	
+	console.log("data.sort", data.sort, typeof data.sort)
 	try{
 		data_primaryFilter = JSON.parse(data.primaryFilter)
 	} catch(error){
@@ -125,12 +126,19 @@ async function adminGetData(req,res){
 	}
 	try{
 		data_fields = JSON.parse(data.fields)
+	}catch(error){
+		message = `can't parse fields: ${error}`
+	}	
+	try{
 		data_secondaryFilter = JSON.parse(data.secondaryFilter)
+	}catch(error){
+		message = `can't parse secondaryFilter: ${error}`
+	}
+	try{
 		data_sort = JSON.parse(data.sort)
 	}catch(error){
-		message = `can't parse either fields, secondaryFilter or sort ${error}`
+		message = `can't parse sort: ${error}`
 	}
-	
 	//check if collection exists in database
 	let collection = data.collection
 	if( !(collection in dcm)){
@@ -273,9 +281,20 @@ async function adminUpdateData(req,res){
 		return res.status(400).json({"message":"collection doesnt exist in database"})
 	}
 	
+	let data_primaryFilter
+	let data_update
+	try{
+		data_primaryFilter = JSON.parse(data.primaryFilter)
+	} catch(error){
+		return res.status(400).json({"message":`can't parse priamry Filter to json: ${error}`})
+	}
 	
-	const data_primaryFilter = data.primaryFilter
-	const data_update = data.update
+	try{
+		data_update = JSON.parse(data.update)
+	} catch(error){
+		return res.status(400).json({"message":`can't parse update to json: ${error}`})
+	}
+	
 	
 	//setting guide for collection
 	let guide = null
@@ -356,8 +375,12 @@ async function adminMovetoArchive(req,res){
 	collection = dcm[collection]
 	archive = dcm[archive]
 	
-	
-		const data_primaryFilter = data.primaryFilter
+	let data_primaryFilter 
+	try{
+		data_primaryFilter = JSON.parse(data.primaryFilter)
+	} catch(error){
+		return res.status(400).json({"message":`cant parse primary Filter: ${error}`})
+	}
 	
 	//pasing filter
 	let filter = await filterConditionParser(data_primaryFilter, guide)
@@ -419,9 +442,12 @@ async function adminDeleteArchiveData(req,res){
 	
 	console.log("--------guide----------\n",guide,"\n-------------guide-----------")
 	
-	
-		const data_primaryFilter = data.primaryFilter
-	
+	let data_primaryFilter 
+	try{
+		data_primaryFilter = JSON.parse(data.primaryFilter)
+	} catch(error){
+		return res.status(400).json({"message":`cant parse primary Filter: ${error}`})
+	}
 	
 	//parse filter
 	let filter = await filterConditionParser(data_primaryFilter, guide)
@@ -434,7 +460,7 @@ async function adminDeleteArchiveData(req,res){
 	let result = {}
 	try{ //delete multiple records if multi is set to true
 		if(data.multi === true) result = await archive.deleteMany(filter)
-			else result = await archive.deleteMany(filter)
+			else result = await archive.deleteOne(filter)
 	} catch(error){
 		return res.status(500).json({"message":`server error:${error}`})
 	}

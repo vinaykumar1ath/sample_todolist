@@ -65,7 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const modeSelect = document.getElementById("mode");
   const primaryFilterButton = document.querySelector(".primary-filter button");
   const updateButton = document.querySelector(".update button");
-
+  const viewerLoadButton = document.getElementById("viewer-content-load-button");
+  
+  viewerLoadButton.addEventListener("click", queryWithFilterLoad);
   if (collectionSelect) {
     collectionSelect.addEventListener("change", handleCollectionChange);
   }
@@ -92,6 +94,7 @@ function resetQueryingAndEditingDynamics() {
   // Reset Mode and Buttons
   document.getElementById('mode').value = "Default Mode";
   loadModeButtons();
+  skip = undefined
   // const buttonsDiv = document.querySelector(".database-interaction-buttons");
   // buttonsDiv.innerHTML = "";
 }
@@ -336,13 +339,24 @@ function loadModeButtons() {
   });
 }
 
+let skip
 async function queryWithFilter(){
+	skip = undefined
+	await queryWithFilterSkip()
+}
+
+async function queryWithFilterLoad(){
+	if(skip)
+		await queryWithFilterSkip()
+}
+
+async function queryWithFilterSkip(){
 	let data = {};
-	
 	data.collection = selectedCollection;
 	data.primaryFilter = JSON.stringify(getFilterData());
 	
 	const secondaryFilter = getSecFilterData();
+	if( skip) {secondaryFilter.skip = skip; secondaryFilter.limit = 10}
 	if(Object.keys(secondaryFilter).length > 0) data.secondaryFilter = JSON.stringify(secondaryFilter);
 	
 	const fields = getCheckedFields();
@@ -354,14 +368,19 @@ async function queryWithFilter(){
 	console.log(data);
 	const response = await makeApiRequest("/admin/queryData", "GET", data);
 	console.log(response.response);
-	if(response.statusCode === 200)
-		populateViewerContent(response.response.list, collections[selectedCollection])
+	if(response.statusCode === 200){
+		populateViewerContent(response.response.list, collections[selectedCollection],(! skip))
+		skip = response.response.skip + response.response.count
+	}
 	else alert(response.response.message)
 }
 
-function populateViewerContent(data, guide) {
-    const viewerContent = document.querySelector('.viewer-content');
-    viewerContent.innerHTML = ''; // Clear existing content
+function populateViewerContent(data, guide, clear ) {
+	
+	const viewerContent = document.querySelector('.viewer-content');
+	if(clear){
+		viewerContent.innerHTML = ''; // Clear existing content
+	}
 
     // Iterate over each JSON object
     data.forEach(item => {

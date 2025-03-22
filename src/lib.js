@@ -129,10 +129,10 @@ async function filterConditionParser(rawObj, guide){
 		}
 		// construct a mongo db compatible json object
 		result.object[field]={}
+		//result.object[field ][ (guide[field][2] === "date") ? "$date" : "neglect"]  = {}
 		console.log("mongo condition key",mcp[rawObj[field][0]][0], typeof mcp[rawObj[field][0]][0])
 		console.log("value",rawObj[field][1], typeof rawObj[field][1])
-		
-		result.object[field][mcp[rawObj[field][0]][0]] = rawObj[field][1]
+		result.object[field][mcp[rawObj[field][0]][0]] = (guide[field][2] !== "date" ) ? rawObj[field][1] : new Date(rawObj[field][1])
 		
 		console.log("result",result.object, typeof result.object)
 	}
@@ -249,7 +249,7 @@ async function updateParser(rawObj, guide){
 		console.log("value",rawObj[field][1], typeof rawObj[field][1])
 		
 		result.object[mup[rawObj[field][0]][0]] = {}
-		result.object[mup[rawObj[field][0]][0]] [field] = rawObj[field][1]
+		result.object[mup[rawObj[field][0]][0]] [field] = (guide[field][2] !== "date" ) ? rawObj[field][1] : new Date(rawObj[field][1])
 		
 		console.log("result",result.object, typeof result.object)
 	}

@@ -207,7 +207,7 @@ async function adminGetData(req,res){
 	}
 	
 	skip = data_secondaryFilter.skip || 0
-	limit = data_secondaryFilter.limit || 10
+	limit = (data_secondaryFilter.limit <= 10) ? data_secondaryFilter.limit : 10
 	}
 	
 	//validating the field provided for sorting

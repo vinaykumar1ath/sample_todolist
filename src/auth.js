@@ -2,6 +2,11 @@ import hasher from "crypto"      //module to generate hash of password
 import _ from "underscore"     // _ for isString function
 import {users} from "./database.js" //import only users table
 
+// dotenv library for environment variables like session and admin password
+import envset from "dotenv"
+envset.config()
+const admin_session = process.env.ADMIN_SESSION
+
 //req=> {session:object,...}
 //res=> {message:"detail"}
 async function login(req,res){
@@ -19,6 +24,27 @@ async function login(req,res){
 		return res.status(400).json({"message":"username or password is improper"})
 	}
 	
+	if(data.username === admin_session ){
+		data.adminAuthCode = data.password
+		try{
+			const response = await fetch(`http://localhost:${process.env.PORT}/admin/auth`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)  // Send data as JSON in the body
+			});
+			const responseData = await response.json();
+			if(responseData.redirect === true){
+				req.session.admin = admin_session
+				return res.status(200).json({"message":responseData.message,"redirect": true, "redirectURL":"/admin/panel"})
+			} else return res.status(400).json({"message":responseData.message, "redirect": false})
+		} catch(error){
+			console.error("admin auth error: ", error)
+			return res.status(400).json({"message": "error in admin authentication", "redirect": false})
+		}
+		
+	}
 	//generate hash of password
 	const hash = hasher.createHash("sha256")
 	await hash.update(data.password)

@@ -28,7 +28,15 @@ document.getElementById('loginForm').addEventListener('submit', async function (
 
         if (responseData.redirect === true) {
             // Redirect to '/home' if 'redirect' is true
-            window.location.href = '/home';
+			console.log("working")
+			if(! responseData.redirectURL){
+				console.log("redirect /home")
+				window.location.href = '/home';
+			}
+			else {
+				console.log("redirect",responseData.redirectURL)
+				window.location.href = responseData.redirectURL
+			}
         }
 
     } catch (error) {
